@@ -1,0 +1,15 @@
+:root {
+  --measure: 55ch;
+  --mid-measure: 35ch;
+  --min-measure: 25ch;
+}
+
+html,
+body,
+div,
+header,
+nav,
+main,
+footer {
+  max-inline-size: none;
+}

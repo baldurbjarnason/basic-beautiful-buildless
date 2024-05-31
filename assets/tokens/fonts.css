@@ -1,0 +1,30 @@
+:root {
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-family-mono: ui-monospace, Fira Mono, DejaVu Sans Mono, Menlo, Consolas, Liberation Mono, Monaco, Lucida Console, monospace;
+  --font-size: 125%;
+  --font-size: clamp(0.85rem, 0.75rem + 0.65vw, 1.25rem);
+  --font-size-small: clamp(0.75rem, 0.55rem + 0.65vw, 1rem);
+  --font-size-large: clamp(1.25rem, 0.75rem + 1vw, 3.5rem);
+  --font-size-xlarge: clamp(1.5rem, 1rem + 9vw, 8rem);
+  --line-height: 1.375;
+  --line-height-narrow: 1.2;
+  --line-height-xnarrow: 1;
+  --paragraph-spacing: 1.45rem;
+  --text-color: #000;
+  --indent: 1.75rem;
+}
+
+@supports (font-size: clamp(1.25rem, 0.7rem + 8.5cqw, 3.5rem)) {
+  :root {
+    --font-size-xlarge: clamp(1.5rem, 1rem + 9cqw, 8rem);
+    --font-size-small: clamp(0.85rem, 0.85rem + 1cqw, 1.25rem);
+    --font-size-large: clamp(1.25rem, 1rem + 3cqw, 2.5rem);
+  }
+  .PostCard,
+  .Title,
+  .Post,
+  .SeriesNavigation {
+    container-type: inline-size;
+  }
+}

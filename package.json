@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0-alpha.10",
+    "@swc/wasm": "^1.5.16",
+    "@swc/wasm-web": "^1.5.16"
+  },
+  "name": "instant-map",
+  "version": "1.0.0",
+  "description": "Instant Import Maps, just add package names!",
+  "main": ".eleventy.js",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@swc/core": "^1.5.7"
+  },
+  "scripts": {
+    "test": "node --test --experimental-test-coverage --test-reporter=spec"
+  },
+  "author": "Baldur Bjarnason",
+  "license": "Apache-2.0"
+}

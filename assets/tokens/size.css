@@ -1,0 +1,40 @@
+:root {
+  --size-xxsmall: 0.32rem;
+  --size-xsmall: 0.48rem;
+  --size-small: 0.73rem;
+  --size-smallish: 0.85rem;
+  --size-default: 1.1rem;
+  --size-medium: 1.5rem;
+  --size-l1: 1.65rem;
+  --size-l2: calc(var(--size-l1) * 1.5);
+  --size-l3: calc(var(--size-l2) * 1.5);
+  --size-l4: calc(var(--size-l3) * 1.5);
+  --size-l5: calc(var(--size-l4) * 1.5);
+  --size-block: calc(1rem * 8);
+  --size-proportional: clamp(0.75rem, 0.5rem + 2.5vw, 2.475rem);
+}
+
+@supports (font-size: clamp(1.25rem, 0.7rem + 8.5cqw, 3.5rem)) {
+  :root {
+  --size-base-proportion: calc(0.5rem + 2.5cqw);
+  --size-proportional: clamp(0.75rem, var(--size-base-proportion), 1rem);
+  --size-xxsmall: clamp(0.32rem, var(--size-base-proportion) * 0.33, 1.475rem);
+  --size-xsmall: clamp(0.48rem, var(--size-base-proportion) * 0.5, 2rem);
+  --size-small: clamp(0.75rem, var(--size-base-proportion) * 0.75, 2.2rem);
+  --size-smallish: clamp(0.85rem, var(--size-base-proportion) * 0.85, 2.475rem);
+  --size-default: var(--size-proportional);
+  --size-medium: clamp(0.75rem, var(--size-base-proportion) * 1.5, 2.475rem);
+  --size-l1: clamp(0.75rem, var(--size-base-proportion) * 1.5 * 1.5, 3rem);
+  --size-l2: clamp(0.75rem, var(--size-base-proportion) * 1.5 * 1.5 * 1.5, 4.5rem);
+  --size-l3: clamp(0.75rem, var(--size-base-proportion) * 1.5 * 1.5 * 1.5 * 1.5, 6.25rem);
+  --size-l4: clamp(0.75rem, var(--size-base-proportion) * 1.5 * 1.5 * 1.5 * 1.5 * 1.5, 9rem);
+  --size-l5: clamp(0.75rem, var(--size-base-proportion) * 1.5 * 1.5 * 1.5 * 1.5 * 1.5 * 15, 17rem);
+  --size-block: calc(1rem * 8);
+  }
+  .PostCard,
+  .Title,
+  .Post,
+  .SeriesNavigation {
+    container-type: inline-size;
+  }
+}

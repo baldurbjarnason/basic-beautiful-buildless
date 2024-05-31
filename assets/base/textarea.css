@@ -1,0 +1,18 @@
+textarea {
+  padding: var(--size-xsmall);
+  box-shadow: var(--shadow-elevation-low-inset);
+/*  border: none;*/
+  border: var(--border-color) solid 0.25rem;
+  width: 100%;
+  display: block;
+  max-inline-size: none;
+  margin: var(--size-default) 0;
+  white-space: pre;
+  background-color: rgb(255 255 255 / 75%);
+}
+
+textarea:focus-visible {
+  border: var(--base-back) solid 0.25rem;
+  outline-offset: 0.125rem;
+  outline: 0.25rem var(--border-color) solid;
+}

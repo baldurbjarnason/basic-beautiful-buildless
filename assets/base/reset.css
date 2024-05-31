@@ -1,0 +1,23 @@
+p,
+span {
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+[aria-hidden="true"] {
+  display: none;
+}
+
+ol,
+blockquote,
+ul,
+dl {
+  padding: 0 var(--size-l1);
+  text-indent: 0;
+}

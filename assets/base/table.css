@@ -1,0 +1,18 @@
+table {
+  page-break-inside: avoid;
+  margin: 1.1em 0;
+  -webkit-hyphens: manual;
+  -ms-hyphens: manual;
+  hyphens: manual;
+  text-indent: 0;
+  /* table-layout: fixed; */
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+th {
+  -webkit-hyphens: manual;
+  -ms-hyphens: manual;
+  hyphens: manual;
+  text-align: left;
+  padding-inline-start: 1rem;
+}

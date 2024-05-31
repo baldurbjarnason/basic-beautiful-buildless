@@ -1,0 +1,26 @@
+figure {
+  padding: 0;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  text-indent: 0;
+  margin: 0;
+  page-break-inside: avoid;
+}
+
+figure + figure {
+  padding-block-start: 0;
+}
+
+h3 + figure {
+  padding-block-start: var(--size-default);
+  margin-block-start: 0;
+}
+
+figcaption {
+  font-size: var(--font-size-small);
+  margin-block-start: var(--size-small);
+  margin-inline: auto 0;
+  font-style: italic;
+  text-align: right;
+}

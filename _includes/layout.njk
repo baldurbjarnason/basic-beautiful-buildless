@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>{% block head %}
+  <meta charset="utf-8">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or pkg.description }}">
+  <link rel="fallback-stylesheet" href="/assets/fallback.css" id="fallback-styles">
+  <title>{{ title or site.title }}</title>
+  <style>
+    @layer {
+      head {
+        --layers: 42;
+      }
+    }
+  </style>
+
+{{layers | safe}}
+{% block scripts %}
+{% endblock %}
+{% endblock %}
+</head>
+<body>
+  <script>
+      var styles = window.getComputedStyle(document.head);
+      if (styles.getPropertyValue("--layers") !== "42") {
+        document.getElementById("fallback-styles").setAttribute("rel", "stylesheet");
+        // The browser doesn't support Cascade Layers or custom properties. Either way, they're getting the degraded experience.
+        window.CSS_MUSTARD = false;
+      } else {
+        console.log("layers supported")
+      }
+  </script>
+    
+
+    <main id="skip">
+      {{ content | safe }}
+
+{% block mainend %}
+{% endblock %}
+    </main>
+</body>
+</html>

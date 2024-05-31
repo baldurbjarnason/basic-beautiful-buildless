@@ -1,0 +1,21 @@
+a:link {
+  color: var(--link);
+  position: relative;
+  text-decoration: underline var(--link-border) 0.15rem;
+  animation: var(--animation-act-small);
+}
+a:visited {
+  color: var(--visited);
+  text-decoration-color: var(--visited-border);
+}
+a:hover {
+  color: #620;
+  text-decoration-color: #66220080;
+  text-decoration-thickness: 0.25rem;
+  animation: var(--animation-bounce-small);
+}
+a:focus,
+a:active {
+  text-decoration-thickness: 0.25rem;
+  animation: var(--animation-bounce-small);
+}

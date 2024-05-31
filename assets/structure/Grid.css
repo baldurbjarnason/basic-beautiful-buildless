@@ -1,0 +1,20 @@
+.Grid {
+  margin-inline: auto;
+  max-inline-size: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--mid-measure), 1fr));
+  margin: 0;
+}
+
+.Grid > * {
+  margin: 0;
+  padding: 0;
+}
+
+.Grid-block {
+  grid-template-columns: repeat(auto-fit, minmax(var(--size-block), 1fr));
+}
+
+.Grid-wide {
+  --mid-measure: 45ch;
+}

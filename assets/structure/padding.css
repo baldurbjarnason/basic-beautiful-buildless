@@ -1,0 +1,23 @@
+.padding-none {
+  padding: 0;
+}
+.padding-default {
+  padding: var(--size-default);
+}
+
+.padding-small {
+  padding: var(--size-small);
+}
+.padding-xsmall {
+  padding: var(--size-xsmall);
+}
+.padding-l1 {
+  padding: var(--size-l1);
+}
+.padding-l2 {
+  padding: var(--size-l2);
+}
+
+.padding-single {
+  padding: 1px;
+}

@@ -1,0 +1,11 @@
+h3 {
+  font-size: var(--size-l1);
+  line-height: var(--line-height-narrow);
+  font-weight: 800;
+  text-align: left;
+  margin-bottom: 0.55rem;
+  font-variant-caps: small-caps;
+  -webkit-hyphens: manual;
+  -ms-hyphens: manual;
+  hyphens: manual;
+}

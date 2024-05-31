@@ -1,0 +1,60 @@
+.Button {
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.25rem 0.75rem 0.4rem;
+  /* border-radius: 0.45rem; */
+  box-shadow: var(--shadow-elevation-medium);
+  border: none;
+  border-block-end: 0.25rem solid var(--link-border);
+  color: var(--link);
+  background-color: white;
+  margin: 0;
+  text-align: center;
+  transition: box-shadow cubic-bezier(1, 0, 0, 1) 250ms;
+  position: relative;
+  font-variant-caps: all-small-caps;
+  font-weight: 600;
+  font-size: var(--size-default);
+  font-family: var(--font-family);
+  animation: var(--animation-act-small);
+}
+
+.Button span {
+  font-variant-caps: all-small-caps;
+  font-weight: 900;
+  font-size: var(--size-default);
+  font-family: var(--font-family);
+}
+.Button:visited {
+  color: var(--link);
+}
+
+.Button[aria-current="page"] {
+  /* box-shadow: var(--shadow-elevation-medium); */
+  /* color: black; */
+  border-top-width: 0.25rem;
+  border-bottom-width: 0.25rem;
+  font-weight: 800;
+  background-color: #fafafa;
+}
+
+.Button:hover {
+  background-color: var(--link-border);
+  border-color: transparent;
+  /* box-shadow: var(--shadow-elevation-medium); */
+
+  animation: var(--animation-bounce-small);
+}
+
+.Button:active {
+  color: white;
+  background-color: var(--visited);
+  animation: var(--animation-bounce-small);
+}
+.Button:focus {
+  animation: var(--animation-bounce-small);
+}

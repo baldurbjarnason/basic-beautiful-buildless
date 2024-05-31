@@ -1,0 +1,5 @@
+.Squares > * {
+  inline-size: 100%;
+  min-block-size: var(--size-block);
+  aspect-ratio: 1/1;
+}

@@ -1,0 +1,19 @@
+.Form {
+  display: grid;
+  max-inline-size: none;
+  padding-block: var(--size-default) var(--size-medium);
+  padding-inline: var(--size-medium);
+  grid-template-columns: minmax(auto, var(--measure));
+  gap: var(--size-smallish);
+  background-color: var(--base-back);
+  border-inline-start: var(--size-default) solid var(--yellow-border);
+}
+
+.Form > * {
+}
+
+.Form label {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: var(--size-l1);
+}

@@ -1,0 +1,34 @@
+.gap-none {
+  gap: 0;
+  column-gap: 0;
+}
+.gap-default {
+  gap: var(--size-default);
+  column-gap: var(--size-default);
+}
+
+.gap-small {
+  gap: var(--size-small);
+  column-gap: var(--size-small);
+}
+.gap-xsmall {
+  gap: var(--size-xsmall);
+  column-gap: var(--size-xsmall);
+}
+.gap-l1 {
+  gap: var(--size-l1);
+  column-gap: var(--size-l1);
+}
+.gap-l2 {
+  gap: var(--size-l2);
+  column-gap: var(--size-l2);
+}
+
+.gap-space-between {
+  justify-content: space-between;
+}
+
+.gap-single {
+  gap: 1px;
+  column-gap: 1px;
+}

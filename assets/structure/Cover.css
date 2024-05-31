@@ -1,0 +1,8 @@
+.Cover {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.Cover > .Primary {
+  margin-block: auto;
+}

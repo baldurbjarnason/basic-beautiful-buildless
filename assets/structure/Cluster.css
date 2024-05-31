@@ -1,0 +1,12 @@
+.Cluster {
+  display: flex;
+  flex-wrap: wrap;
+  max-inline-size: none;
+  align-items: baseline;
+}
+.Cluster > * {
+}
+
+.Cluster-centered {
+  justify-content: center;
+}

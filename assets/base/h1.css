@@ -1,0 +1,12 @@
+h1 {
+  font-size: var(--font-size-xlarge);
+  margin: var(--size-l4) 0 var(--size-small);
+  line-height: var(--line-height-xnarrow);
+  text-align: start;
+  font-weight: 900;
+  word-spacing: 0.35ch;
+  text-wrap: balance;
+  -webkit-hyphens: manual;
+  -ms-hyphens: manual;
+  hyphens: manual;
+}

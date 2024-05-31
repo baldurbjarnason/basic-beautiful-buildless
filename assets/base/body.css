@@ -1,0 +1,33 @@
+body {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  /* background-image: conic-gradient(
+    from 0deg at -25% 50%,
+    var(--base-back) 0deg,
+    #fffef5 90deg,
+    #f6f1c0 180deg
+  );
+  background-image: radial-gradient(
+      ellipse at center,
+      white 0,
+      white 50%,
+      transparent 100%
+    ),
+    conic-gradient(
+      from 0deg at -50% 50%,
+      var(--base-back) 0deg,
+      #fff 70deg,
+      #f6f1c0 200deg
+    ); 
+  border: 1px solid #f7f8f1;
+  background-repeat: no-repeat, no-repeat;*/
+  position: relative;
+  color: var(--text-color);
+  margin: 0;
+  line-height: var(--line-height);
+  scroll-behavior: smooth;
+  position: relative;
+  font-size: var(--font-size);
+  min-height: 100vh;
+  background-color: var(--orange-back);
+}

@@ -1,0 +1,17 @@
+.Primary {
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  row-gap: var(--size-default);
+  position: relative;
+  grid-template-columns:
+    minmax(calc(var(--size-default) * 2), 1fr) minmax(
+      var(--min-measure),
+      var(--measure)
+    )
+    minmax(calc(var(--size-default) * 2), 1fr);
+}
+
+.Primary > * {
+  grid-column: 2 / 2;
+}

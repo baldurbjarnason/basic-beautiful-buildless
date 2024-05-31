@@ -1,0 +1,15 @@
+instant-results {
+  aspect-ratio: 1024/429;
+  flex-direction: column;
+  padding-block: var(--size-default);
+  padding-inline: var(--size-medium);
+  background-color: var(--blue-back);
+  border-inline-start: var(--size-default) solid var(--blue-border);
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  display: block;
+  max-inline-size: none;
+  height: 100vh;
+  --border-color: var(--blue-border);
+}

@@ -1,0 +1,13 @@
+input {
+  padding: 0.25rem;
+  box-shadow: var(--shadow-elevation-low-inset);
+/*  border: none;*/
+  border: var(--base-grey) solid 0.25rem;
+  width: 100%;
+}
+
+input:focus-visible {
+  border: var(--base-back) solid 0.25rem;
+  outline-offset: 0.125rem;
+  outline: 0.25rem var(--yellow-border) solid;
+}

@@ -1,0 +1,21 @@
+blockquote {
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  display: grid;
+  row-gap: var(--size-default);
+  padding: 0 var(--size-default);
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  text-indent: 0;
+  margin-inline: auto;
+  page-break-inside: avoid;
+}
+blockquote,
+blockquote p,
+figure blockquote,
+figure blockquote p {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-narrow);
+}

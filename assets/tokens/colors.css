@@ -1,0 +1,27 @@
+:root {
+  --green-back: #baffc9;
+  --green-border: #a9eeb8;
+  --blue-back: #bae1ff;
+  --blue-border: #a9d0ee;
+  --orange-back: #ffdfba;
+  --orange-border: #eecea9;
+  --link-back: #cccccc1a;
+  --yellow-border: #eeeea0;
+  --base-back: #fff9c6;
+  --base-grey: #fafaef;
+  --base-border: #e2e2d7;
+  --link: #375575;
+  --visited: #b0014e;
+  --link-border: #add2e1;
+  --visited-border: #b0014d7c;
+  --faded-yellow: #f8f7f2;
+  --background-color-post: var(--base-grey);
+  --postCard-border-color: var(--base-border);
+}
+
+.BaseBack {
+  background-color: var(--base-back);
+}
+.GreyBack {
+  background-color: var(--base-grey);
+}

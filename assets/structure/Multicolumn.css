@@ -1,0 +1,5 @@
+.Multicolumn {
+  column-width: 26rem;
+  column-count: auto;
+  max-inline-size: none;
+}
