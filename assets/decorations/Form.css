@@ -13,7 +13,17 @@
 }
 
 .Form label {
-  text-transform: uppercase;
   font-weight: 600;
-  font-size: var(--size-l1);
+  font-size: var(--size-default);
+}
+
+.Form-checkbox-text {
+  font-style: italic;
+  padding: 0.25rem;
+  font-size: var(--size-xsmall);
+}
+
+input[type="checkbox"]:checked  + .Form-checkbox-text {
+  background-color: var(--orange-back);
+  border-block-end: 0.25rem var(--orange-border) solid;
 }

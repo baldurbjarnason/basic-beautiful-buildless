@@ -57,7 +57,7 @@ function normaliseSpecifier(specifier) {
 }
 
 // Use document.createTextNode to inject this into the rendered template
-export async function markup(specifiers = []) {
+export async function markup(specifiers = [], json = false) {
 	const map = { imports: {} };
 	const graph = await fetchAllScripts(specifiers);
 	for (const pack of graph.filter((pack) => pack.name !== undefined)) {
@@ -66,10 +66,16 @@ export async function markup(specifiers = []) {
 	// turn graph into modulepreloads
 	const modulepreloads = graph.map(
 		(pack) =>
-			`<link rel="modulepreload" href="${pack.url}" integrity="${pack.sri}">`,
+			`<link rel='modulepreload' href='${pack.url}' integrity='${pack.sri}'>`,
 	);
+	if (json) {
+		return {
+			modulepreloads,
+			map,
+		};
+	}
 	return `${modulepreloads.join("\n")}
-<script type="importmap">
+<script type='importmap'>
 ${JSON.stringify(map, null, "\t")}
 </script>`;
 }
@@ -105,7 +111,7 @@ export async function shimMarkup() {
 	const scriptResponse = await fetch(SHIM_URL);
 	const scriptText = await scriptResponse.text();
 	const sri = await checksum(scriptText);
-	return `<script async src="${SHIM_URL}" integrity="${sri}" crossorigin="anonymous"></script>`;
+	return `<script async src='${SHIM_URL}' integrity='${sri}' crossorigin='anonymous'></script>`;
 }
 
 export async function fetchScript(url) {

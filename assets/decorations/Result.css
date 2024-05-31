@@ -1,5 +1,4 @@
 .Result {
-  aspect-ratio: 1024/429;
   flex-direction: column;
   padding-block: var(--size-default);
   padding-inline: var(--size-medium);
@@ -37,4 +36,18 @@
 
 .Result-collection {
   justify-content: center;
+}
+
+.Result-nav {
+  color: var(--link);
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--blue-border);
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.Result-nav:hover {
+  color: white;
+  background-color: var(--link);
 }

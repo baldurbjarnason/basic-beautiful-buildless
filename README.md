@@ -14,10 +14,15 @@ permalink: "/"
 </div>
 
 <form action="/process/" method="get" class="Form">
-	<label class="FormLabel" for="specifiers">
+
+<div><label class="FormLabel" for="specifiers">
 		Package names
+		<input name="specifiers" value="" type="text" id="specifiers" aria-describedby="input-description">
 	</label>
-		<p><input name="specifiers" value="" type="text" id="specifiers" aria-describedby="input-description"></p>
+
+<label class="FormLabel">
+	<input name="json" type="checkbox" id="json-input"> <span class="Form-checkbox-text">Return markup and map as a JSON object</span>
+	</label></div>
 
 <div id="input-description">
 

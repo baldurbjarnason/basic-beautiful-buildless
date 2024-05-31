@@ -1,12 +1,16 @@
-input {
-  padding: 0.25rem;
+input[type="text"] {
+  padding: 0.25rem 0;
+  margin: 0.25rem 0;
+  margin-inline-start: -0.25rem;
   box-shadow: var(--shadow-elevation-low-inset);
 /*  border: none;*/
   border: var(--base-grey) solid 0.25rem;
   width: 100%;
+  font-weight: 400;
+
 }
 
-input:focus-visible {
+input[type="text"]:focus-visible {
   border: var(--base-back) solid 0.25rem;
   outline-offset: 0.125rem;
   outline: 0.25rem var(--yellow-border) solid;

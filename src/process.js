@@ -10,9 +10,10 @@ import { markup, shimMarkup } from "./fetchScript.js";
 
 export async function processParams(params) {
 	const specifiers = params.get("specifiers").split(/\W+/);
+	const json = params.get("json") === "on";
 	let result = "";
 	try {
-		result = await markup(specifiers);
+		result = await markup(specifiers, json);
 	} catch (err) {
 		console.error(err);
 	}
@@ -20,9 +21,12 @@ export async function processParams(params) {
 		return { ok: false, markup: "<p>This does not seem to have worked.</p>" };
 	}
 	let shim = "";
-	if (params.get("shim") !== "true") {
+	if (json) {
+		result.shim = await shimMarkup();
+	} else {
 		shim = await shimMarkup();
 	}
+	result = JSON.stringify(result, null, "\t");
 	const rows = result.split("\n");
 	return {
 		ok: true,

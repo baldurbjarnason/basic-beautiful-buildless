@@ -77,15 +77,28 @@ const resultGraph = [
 	},
 ];
 
-const testMarkup = `<link rel="modulepreload" href="https://esm.sh/v135/@webreflection/signal@2.1.2" integrity="sha384-JfEi3Y4+14WWoUj/LdlxmXAsucfgWPM1HpgB+GA/eNk3D7QQ/SpvZdOUUclkArtd">
-<link rel="modulepreload" href="https://esm.sh/v135/@webreflection/signal@2.1.2/esnext/signal.mjs" integrity="sha384-V4WC14TkBOFGabE4SWmnyhiBxIbK0e6rJHt4E04hTK1NzopTlcLNI5+iOkP5wvHI">
-<script type="importmap">
+const testMarkup = `<link rel='modulepreload' href='https://esm.sh/v135/@webreflection/signal@2.1.2' integrity='sha384-JfEi3Y4+14WWoUj/LdlxmXAsucfgWPM1HpgB+GA/eNk3D7QQ/SpvZdOUUclkArtd'>
+<link rel='modulepreload' href='https://esm.sh/v135/@webreflection/signal@2.1.2/esnext/signal.mjs' integrity='sha384-V4WC14TkBOFGabE4SWmnyhiBxIbK0e6rJHt4E04hTK1NzopTlcLNI5+iOkP5wvHI'>
+<script type='importmap'>
 {
 	"imports": {
 		"@webreflection/signal": "https://esm.sh/v135/@webreflection/signal@2.1.2"
 	}
 }
 </script>`;
+
+const testJSON = {
+	modulepreloads: [
+		`<link rel='modulepreload' href='https://esm.sh/v135/@webreflection/signal@2.1.2' integrity='sha384-JfEi3Y4+14WWoUj/LdlxmXAsucfgWPM1HpgB+GA/eNk3D7QQ/SpvZdOUUclkArtd'>`,
+		`<link rel='modulepreload' href='https://esm.sh/v135/@webreflection/signal@2.1.2/esnext/signal.mjs' integrity='sha384-V4WC14TkBOFGabE4SWmnyhiBxIbK0e6rJHt4E04hTK1NzopTlcLNI5+iOkP5wvHI'>`,
+	],
+	map: {
+		imports: {
+			"@webreflection/signal":
+				"https://esm.sh/v135/@webreflection/signal@2.1.2",
+		},
+	},
+};
 
 test("fetchAllScripts", async function (t) {
 	await t.test("basic graph", async function () {
@@ -96,11 +109,15 @@ test("fetchAllScripts", async function (t) {
 		const markupText = await markup(["@webreflection/signal"]);
 		assert.deepEqual(markupText, testMarkup);
 	});
+	await t.test("json markup", async function () {
+		const markupJSON = await markup(["@webreflection/signal"], true);
+		assert.deepEqual(markupJSON, testJSON);
+	});
 	await t.test("shim markup", async function () {
 		const markupText = await shimMarkup();
 		assert.deepEqual(
 			markupText,
-			`<script async src="https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js" integrity="sha384-ie1x72Xck445i0j4SlNJ5W5iGeL3Dpa0zD48MZopgWsjNB/lt60SuG1iduZGNnJn" crossorigin="anonymous"></script>`,
+			`<script async src='https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js' integrity='sha384-ie1x72Xck445i0j4SlNJ5W5iGeL3Dpa0zD48MZopgWsjNB/lt60SuG1iduZGNnJn' crossorigin='anonymous'></script>`,
 		);
 	});
 });
