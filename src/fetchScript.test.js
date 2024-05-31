@@ -88,6 +88,21 @@ const testMarkup = `<link rel='modulepreload' href='https://esm.sh/v135/@webrefl
 </script>`;
 
 const testJSON = {
+	graph: [
+		{
+			name: "@webreflection/signal",
+			specifiers: [
+				"https://esm.sh/v135/@webreflection/signal@2.1.2/esnext/signal.mjs",
+			],
+			sri: "sha384-JfEi3Y4+14WWoUj/LdlxmXAsucfgWPM1HpgB+GA/eNk3D7QQ/SpvZdOUUclkArtd",
+			url: "https://esm.sh/v135/@webreflection/signal@2.1.2",
+		},
+		{
+			specifiers: [],
+			sri: "sha384-V4WC14TkBOFGabE4SWmnyhiBxIbK0e6rJHt4E04hTK1NzopTlcLNI5+iOkP5wvHI",
+			url: "https://esm.sh/v135/@webreflection/signal@2.1.2/esnext/signal.mjs",
+		},
+	],
 	modulepreloads: [
 		`<link rel='modulepreload' href='https://esm.sh/v135/@webreflection/signal@2.1.2' integrity='sha384-JfEi3Y4+14WWoUj/LdlxmXAsucfgWPM1HpgB+GA/eNk3D7QQ/SpvZdOUUclkArtd'>`,
 		`<link rel='modulepreload' href='https://esm.sh/v135/@webreflection/signal@2.1.2/esnext/signal.mjs' integrity='sha384-V4WC14TkBOFGabE4SWmnyhiBxIbK0e6rJHt4E04hTK1NzopTlcLNI5+iOkP5wvHI'>`,

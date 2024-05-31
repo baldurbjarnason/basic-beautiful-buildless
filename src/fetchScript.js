@@ -70,6 +70,7 @@ export async function markup(specifiers = [], json = false) {
 	);
 	if (json) {
 		return {
+			graph,
 			modulepreloads,
 			map,
 		};
