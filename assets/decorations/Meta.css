@@ -31,13 +31,13 @@
 }
 
 .Meta-heading {
-	font-size: var(--size-medium);
+	font-size: var(--size-l1);
 	text-transform: uppercase;
 	text-align: center;
-	margin: var(--size-default) 0;
+	margin: var(--size-l1) 0 0;
 	max-inline-size: none;
 	display: block;
-   font-weight: 600;
+  font-weight: 900;
 }
 
 .Meta-package {
@@ -76,5 +76,23 @@
 	font-weight: 200;
 	text-transform: uppercase;
 	display: block;
+	text-align: center;
+}
+
+.Meta p {
+	text-align: center;
+  margin-bottom: var(--size-default);
+	background-color: rgb(255 255 255 / 0.5);
+	padding: var(--size-xsmall);
+	border-block: 1px solid var(--blue-border);
+}
+
+.Meta code {
+	font-family: var(--font-family-mono);
+	font-size: var(--size-medium);
+	text-shadow: 0.125rem 0.125rem var(--blue-border);
+}
+
+.Meta h2 {
 	text-align: center;
 }

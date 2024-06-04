@@ -33,7 +33,16 @@ export async function processParams(params) {
 		shim = await shimMarkup();
 	}
 	result = JSON.stringify(result, null, "\t");
-	const meta = `<h2>Results</h2><div class="Meta">
+	const meta = `
+<p><a href="#code" class="Result-nav">Skip to code</a></p>
+	<div class="Meta">
+	<h2>Results</h2>
+<div class="Notice"><p><em>Calculations and preloads <strong>do not</strong> include WASM files unless they were inlined using Base64 or similar.</em></p>
+</div>
+	<h3 class="Meta-heading">You entered</h3>
+
+<p><code>${escapeMarkup(params.get("specifiers"))}</code></p>
+
 	<h3 class="Meta-heading">Total payload</h3>
 	<div class="Meta-section">
 		<div class="Meta-size"><div class="Meta-size-value">${jsonResult.meta.total}</div><div class="Meta-size-text">uncompressed</div></div>
@@ -44,10 +53,11 @@ export async function processParams(params) {
 	<h3 class="Meta-heading">Package payloads</h3>
 	${packageSizes(jsonResult.meta)}
 	</div>`;
+	// Add skip to code. And "you entered."
 	const rows = result.split("\n");
 	return {
 		ok: true,
-		markup: `${meta}<label class="Meta">
+		markup: `${meta}<label class="Meta" id="code">
 		<span class="ResultLabel Meta-heading">Map and Preloads:</span>
 <textarea spellcheck="false" rows="${rows.length + 2}">${escapeMarkup(result)}
 ${shim}

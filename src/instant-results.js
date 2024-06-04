@@ -21,6 +21,7 @@ class InstantResults extends HTMLElement {
 		const result = await processParams(this.params);
 		if (result.ok) {
 			this.output.textContent = "Done. Results below.";
+			this.output.setAttribute("hidden", "hidden");
 			const fragment = DOMPurify.sanitize(result.markup, {
 				FORBID_TAGS: ["style"],
 				FORBID_ATTR: ["style"],

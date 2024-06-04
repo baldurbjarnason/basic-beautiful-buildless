@@ -1,3 +1,7 @@
 output {
 	display: block;
 }
+
+output[hidden] {
+	display: none;
+}
