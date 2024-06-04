@@ -4,10 +4,19 @@ import { parse } from "./swc.js";
 const encoder = new TextEncoder();
 export async function checksum(scriptText) {
 	const data = encoder.encode(scriptText);
+
+	const ds = new CompressionStream("gzip");
+	const decompressedStream = new Blob([data]).stream().pipeThrough(ds);
+	const compressed = new Uint8Array(
+		await new Response(decompressedStream).arrayBuffer(),
+	);
 	const hash = await crypto.subtle.digest("SHA-384", data);
 	const base64string = btoa(String.fromCharCode(...new Uint8Array(hash)));
-
-	return `sha384-${base64string}`;
+	return {
+		sri: `sha384-${base64string}`,
+		size: data.length,
+		compressed: compressed.length,
+	};
 }
 
 export async function getSpecifiers(inputText, url) {
@@ -24,7 +33,25 @@ export async function fetchAllScripts(specifiers = []) {
 		specifiers.map((specifier) => fetchPackage(specifier)),
 	);
 	const graph = await Promise.all(packages.map((pack) => processScript(pack)));
-	return normaliseGraph(graph.flat());
+	const meta = {
+		packages: {},
+	};
+	for (let index = 0; index < specifiers.length; index++) {
+		const spec = specifiers[index];
+		const subgraph = graph[index];
+		const totalSize = subgraph.reduce((prev, current) => {
+			return prev + current.size;
+		}, 0);
+		const totalCompressed = subgraph.reduce((prev, current) => {
+			return prev + current.compressed;
+		}, 0);
+		meta.packages[spec] = {
+			length: totalSize,
+			size: toHumanReadable(totalSize),
+			compressed: toHumanReadable(totalCompressed),
+		};
+	}
+	return { graph: normaliseGraph(graph.flat()), meta };
 }
 
 export async function fetchPackage(specifier) {
@@ -32,7 +59,7 @@ export async function fetchPackage(specifier) {
 	const scriptResponse = await fetch(url);
 	const resultURL = new URL(scriptResponse.url);
 	const scriptText = await scriptResponse.text();
-	const sri = await checksum(scriptText);
+	const { sri, size, compressed } = await checksum(scriptText);
 	const originalSpecifiers = await getSpecifiers(scriptText, resultURL);
 	const hrefs = originalSpecifiers.map((specifier) => specifier.href);
 	const specifiers = Array.from(new Set(hrefs)).map(
@@ -40,6 +67,8 @@ export async function fetchPackage(specifier) {
 	);
 	return {
 		sri,
+		size,
+		compressed,
 		specifiers,
 		url: resultURL,
 		name: normaliseSpecifier(specifier),
@@ -56,10 +85,38 @@ function normaliseSpecifier(specifier) {
 	return name;
 }
 
+function toHumanReadable(bytes) {
+	const log = 1024;
+	const decimals = 3;
+	const sizes = [
+		"Bytes",
+		"KiB",
+		"MiB",
+		"GiB",
+		"TiB",
+		"PiB",
+		"EiB",
+		"ZiB",
+		"YiB",
+	];
+	const index = Math.floor(Math.log(bytes) / Math.log(log));
+	return `${Number.parseFloat((bytes / log ** index).toFixed(decimals))} ${
+		sizes[index]
+	}`;
+}
+
 // Use document.createTextNode to inject this into the rendered template
-export async function markup(specifiers = [], json = false) {
+export async function toJSON(specifiers = []) {
 	const map = { imports: {} };
-	const graph = await fetchAllScripts(specifiers);
+	const { graph, meta } = await fetchAllScripts(specifiers);
+	const totalSize = graph.reduce((prev, current) => {
+		return prev + current.size;
+	}, 0);
+	const totalCompressed = graph.reduce((prev, current) => {
+		return prev + current.compressed;
+	}, 0);
+	const humanTotal = toHumanReadable(totalSize);
+	const humanCompressed = toHumanReadable(totalCompressed);
 	for (const pack of graph.filter((pack) => pack.name !== undefined)) {
 		map.imports[pack.name] = pack.url;
 	}
@@ -68,16 +125,25 @@ export async function markup(specifiers = [], json = false) {
 		(pack) =>
 			`<link rel='modulepreload' href='${pack.url}' integrity='${pack.sri}'>`,
 	);
-	if (json) {
-		return {
-			graph,
-			modulepreloads,
-			map,
-		};
-	}
-	return `${modulepreloads.join("\n")}
+
+	return {
+		meta: {
+			length: totalSize,
+			total: humanTotal,
+			compressed: humanCompressed,
+			numberOfModules: graph.length,
+			...meta,
+		},
+		graph,
+		modulepreloads,
+		map,
+	};
+}
+
+export async function markup(json) {
+	return `${json.modulepreloads.join("\n")}
 <script type='importmap'>
-${JSON.stringify(map, null, "\t")}
+${JSON.stringify(json.map, null, "\t")}
 </script>`;
 }
 
@@ -85,10 +151,12 @@ function normaliseGraph(graph) {
 	const graphUnique = Array.from(new Set(graph.map((item) => item.url.href)));
 	return graphUnique.map((href) => {
 		const script = graph.find((script) => script.url.href === href);
-		const { sri, specifiers, url } = script;
+		const { sri, specifiers, url, size, compressed } = script;
 
 		const result = {
 			sri,
+			size,
+			compressed,
 			specifiers: specifiers.map((specifier) => specifier.href),
 			url: url.href,
 		};
@@ -111,8 +179,8 @@ const SHIM_URL =
 export async function shimMarkup() {
 	const scriptResponse = await fetch(SHIM_URL);
 	const scriptText = await scriptResponse.text();
-	const sri = await checksum(scriptText);
-	return `<script async src='${SHIM_URL}' integrity='${sri}' crossorigin='anonymous'></script>`;
+	const { sri, size, compressed } = await checksum(scriptText);
+	return `<script async src='${SHIM_URL}' integrity='${sri}' crossorigin='anonymous' data-size='${size}' data-compressed='${compressed}'></script>`;
 }
 
 export async function fetchScript(url) {
@@ -120,9 +188,15 @@ export async function fetchScript(url) {
 	if (!scriptResponse.ok) return [];
 	const resultURL = new URL(scriptResponse.url);
 	const scriptText = await scriptResponse.text();
-	const sri = await checksum(scriptText);
+	const { sri, size, compressed } = await checksum(scriptText);
 	const specifiers = await getSpecifiers(scriptText, resultURL);
-	const graph = await processScript({ sri, specifiers, url: resultURL });
+	const graph = await processScript({
+		sri,
+		size,
+		compressed,
+		specifiers,
+		url: resultURL,
+	});
 	return graph;
 }
 

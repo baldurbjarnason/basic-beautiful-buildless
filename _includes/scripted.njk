@@ -2,7 +2,8 @@
 
 {% block scripts %}
 {% include 'import-map.njk' %}
-<script type="module" src="/src/instant-results.js"></script>
+{{ assets.modulepreloads | safe }}
+{{ assets.main | safe }}
 {% endblock %}
 
 {% block mainend %}

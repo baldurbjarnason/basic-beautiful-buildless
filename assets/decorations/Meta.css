@@ -1,0 +1,78 @@
+.Meta {
+	display:grid;
+	hyphens: manual;
+	background-color: rgb(255 255 255 / 0.5);
+	border-block: 1px solid var(--blue-border);
+	margin: var(--size-default) 0;
+}
+.Meta-section {
+	display: grid;
+	gap: var(--size-medium);
+	grid-template-columns: 1fr 1fr;
+	margin: var(--size-default) 0;
+	border-block: 1px solid var(--blue-border);
+}
+
+.Meta-size-value {
+	font-size: var(--size-l2);
+	font-weight: 900;
+	display: block;
+	text-shadow: 0.5rem 0.5rem var(--blue-border);
+	line-height: 1;
+	text-align: center;
+}
+.Meta-size-text {
+	font-size: var(--size-default);
+	font-weight: 400;
+	text-transform: uppercase;
+	display: block;
+	text-align: center;
+	font-weight: 200;
+}
+
+.Meta h3 {
+	font-size: var(--size-medium);
+	text-transform: uppercase;
+	text-align: center;
+	margin: var(--size-default) 0;
+	max-inline-size: none;
+}
+
+.Meta-package {
+	display: grid;
+	gap: var(--size-default);
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-content: center;
+	align-items: center;
+	padding: var(--size-xsmall) 0;
+	border-block-start: 1px solid var(--blue-border);
+}
+.Meta-package-name {
+	font-family: var(--font-family-mono);
+	font-size: var(--size-medium);
+	text-align: center;
+	font-weight: 600;
+}
+.Meta-package-percentage {
+	font-family: var(--font-family);
+	font-size: var(--size-small);
+	font-weight: 200;
+	text-align: center;
+}
+
+.Meta-package-value {
+	font-size: var(--size-medium);
+	font-weight: 900;
+	display: block;
+	text-shadow: 0.25rem 0.25rem var(--blue-border);
+	line-height: 1;
+	text-align: center;
+}
+.Meta-package-text {
+	font-size: var(--size-small);
+	font-weight: 400;
+	font-weight: 200;
+	text-transform: uppercase;
+	display: block;
+	text-align: center;
+}

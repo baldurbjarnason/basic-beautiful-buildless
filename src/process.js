@@ -6,14 +6,20 @@
 // Ultimately, this will get called by a custom element on the results page and that element is responsible for calling dompurify on the result.
 
 import { escapeMarkup } from "./escape.js";
-import { markup, shimMarkup } from "./fetchScript.js";
+import { markup, shimMarkup, toJSON } from "./fetchScript.js";
 
 export async function processParams(params) {
 	const specifiers = params.get("specifiers").split(/\W+/);
 	const json = params.get("json") === "on";
 	let result = "";
+	let jsonResult;
 	try {
-		result = await markup(specifiers, json);
+		jsonResult = await toJSON(specifiers);
+		if (!json) {
+			result = await markup(jsonResult);
+		} else {
+			result = jsonResult;
+		}
 	} catch (err) {
 		console.error(err);
 	}
@@ -27,13 +33,47 @@ export async function processParams(params) {
 		shim = await shimMarkup();
 	}
 	result = JSON.stringify(result, null, "\t");
+	const meta = `<h2>Results</h2><div class="Meta">
+	<h3>Total payload</h3>
+	<div class="Meta-section">
+		<div class="Meta-size"><div class="Meta-size-value">${jsonResult.meta.total}</div><div class="Meta-size-text">uncompressed</div></div>
+		<div class="Meta-size"><div class="Meta-size-value">${
+			jsonResult.meta.compressed
+		}</div><div class="Meta-size-text">compressed</div></div>
+	</div>
+	<h3>Package payloads</h3>
+	${packageSizes(jsonResult.meta)}
+	</div>`;
 	const rows = result.split("\n");
 	return {
 		ok: true,
-		markup: `<label>
+		markup: `${meta}<label>
 		<span class="ResultLabel">Here is your instant import map, with modulepreloads:</span>
 <textarea spellcheck="false" rows="${rows.length + 2}">${escapeMarkup(result)}
 ${shim}
 </textarea></label>`,
 	};
+}
+
+function packageSizes(meta) {
+	const packageNames = Object.keys(meta.packages);
+	let result = [];
+	for (const name of packageNames) {
+		const percentage = (
+			(meta.packages[name].length / meta.length) *
+			100
+		).toFixed(2);
+		result = result.concat(`<div class="Meta-package">
+			<div class="Meta-package-name">${escapeMarkup(
+				name,
+			)}<div class="Meta-package-percentage">${percentage}%</div></div>
+		<div class="Meta-package-size"><div class="Meta-package-value">${escapeMarkup(
+			meta.packages[name].size,
+		)}</div><div class="Meta-package-text">uncompressed</div></div>
+		<div class="Meta-package-size"><div class="Meta-package-value">${escapeMarkup(
+			meta.packages[name].compressed,
+		)}</div><div class="Meta-package-text">compressed</div></div>
+			</div>`);
+	}
+	return result.join("\n");
 }

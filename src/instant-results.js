@@ -8,7 +8,6 @@ class InstantResults extends HTMLElement {
 	//   super();
 	// }
 	connectedCallback() {
-		console.log("Custom element added to page.");
 		const queryString = window.location.search;
 		this.params = new URLSearchParams(queryString);
 		this.output = this.querySelector("output");

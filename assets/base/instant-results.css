@@ -10,6 +10,9 @@ instant-results {
   width: 100%;
   display: block;
   max-inline-size: none;
-  height: 100vh;
+
   --border-color: var(--blue-border);
+}
+instant-results * {
+  max-inline-size: none;
 }
