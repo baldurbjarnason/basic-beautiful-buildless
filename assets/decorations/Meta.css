@@ -30,12 +30,14 @@
 	font-weight: 200;
 }
 
-.Meta h3 {
+.Meta-heading {
 	font-size: var(--size-medium);
 	text-transform: uppercase;
 	text-align: center;
 	margin: var(--size-default) 0;
 	max-inline-size: none;
+	display: block;
+   font-weight: 600;
 }
 
 .Meta-package {

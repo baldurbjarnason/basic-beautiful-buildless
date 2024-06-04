@@ -34,21 +34,21 @@ export async function processParams(params) {
 	}
 	result = JSON.stringify(result, null, "\t");
 	const meta = `<h2>Results</h2><div class="Meta">
-	<h3>Total payload</h3>
+	<h3 class="Meta-heading">Total payload</h3>
 	<div class="Meta-section">
 		<div class="Meta-size"><div class="Meta-size-value">${jsonResult.meta.total}</div><div class="Meta-size-text">uncompressed</div></div>
 		<div class="Meta-size"><div class="Meta-size-value">${
 			jsonResult.meta.compressed
 		}</div><div class="Meta-size-text">compressed</div></div>
 	</div>
-	<h3>Package payloads</h3>
+	<h3 class="Meta-heading">Package payloads</h3>
 	${packageSizes(jsonResult.meta)}
 	</div>`;
 	const rows = result.split("\n");
 	return {
 		ok: true,
-		markup: `${meta}<label>
-		<span class="ResultLabel">Here is your instant import map, with modulepreloads:</span>
+		markup: `${meta}<label class="Meta">
+		<span class="ResultLabel Meta-heading">Map and Preloads:</span>
 <textarea spellcheck="false" rows="${rows.length + 2}">${escapeMarkup(result)}
 ${shim}
 </textarea></label>`,
