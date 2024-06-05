@@ -1,13 +1,12 @@
-.Title {
-  aspect-ratio: 1024/429;
-  flex-direction: column;
+.InstantMap {
   padding-block: var(--size-default);
   padding-inline: var(--size-medium);
   border-inline-start: var(--size-default) solid var(--orange-border);
   position: relative;
-  justify-content: center;
+  --color-local-border: var(--orange-border);
+  --color-local-front: var(--orange-front);
 }
-.Title-heading {
+.InstantMap-heading {
   padding: 0;
   padding-block: var(--size-default);
   text-align: start;
@@ -16,26 +15,40 @@
   font-size: var(--size-l4);
 }
 
-.Title-main {
+.InstantMap-main {
   color: var(--base-back);
   font-weight: 900;
   -webkit-text-stroke: 0.125rem black;
   text-shadow: 0.5rem 0.5rem var(--orange-border);
 }
 
-.Title-heading em {
+.InstantMap-heading em {
   text-transform: none;
   display: block;
   font-size: var(--size-l2);
 }
 
-.Title-description {
+.InstantMap-description {
   font-weight: 600;
   margin-block: 0 auto;
   border-bottom: 0.25rem solid var(--orange-border);
   text-transform: uppercase;
 }
 
-.Title-collection {
+.InstantMap-collection {
   justify-content: center;
+}
+
+.InstantMap-nav {
+  color: var(--orange-front);
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--orange-border);
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.InstantMap-nav:hover {
+  color: white;
+  background-color: var(--link);
 }

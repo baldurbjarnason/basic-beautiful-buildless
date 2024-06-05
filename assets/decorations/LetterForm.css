@@ -1,0 +1,62 @@
+.LetterForm {
+  display: grid;
+  max-inline-size: none;
+  padding-inline: 0;
+  grid-template-columns: minmax(auto, var(--measure));
+  gap: var(--size-smallish);
+}
+
+.LetterForm > * {
+}
+
+.LetterForm label {
+  font-weight: 600;
+  font-size: var(--size-default);
+}
+
+.LetterForm-fields {
+  gap: var(--size-smallish);
+  display: grid;
+}
+.LetterForm-field, .LetterForm-fields {
+  display: grid;
+}
+
+
+.LetterForm-checkbox-text {
+  font-style: italic;
+  padding: 0.25rem;
+  font-size: var(--size-xsmall);
+}
+
+input[type="checkbox"]:checked  + .LetterForm-checkbox-text {
+  background-color: var(--orange-back);
+  border-block-end: 0.25rem var(--orange-border) solid;
+}
+.LetterForm input {
+  padding: var(--size-xsmall);
+  box-shadow: var(--shadow-elevation-low-inset);
+/*  border: none;*/
+  border: var(--border-color) solid 0.25rem;
+  width: 100%;
+  display: block;
+  max-inline-size: none;
+  white-space: pre;
+  background-color: rgb(255 255 255 / 75%);
+}
+
+.LetterForm input:focus-visible {
+  border: var(--base-back) solid 0.25rem;
+  outline-offset: 0.125rem;
+  outline: 0.25rem var(--border-color) solid;
+}
+
+.LetterForm button {
+  background: conic-gradient(from 1deg at 50% -21%, var(--purple-back), var(--purple-border));
+  border-bottom: 1rem var(--purple-border) solid;
+}
+
+.LetterForm button:hover {
+  background: var(--link);
+  border-color: white;
+}

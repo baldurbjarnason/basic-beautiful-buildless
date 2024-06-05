@@ -6,7 +6,7 @@ textarea {
   width: 100%;
   display: block;
   max-inline-size: none;
-  margin: var(--size-default) 0;
+  margin: var(--size-default) 0 0;
   white-space: pre;
   background-color: rgb(255 255 255 / 75%);
 }

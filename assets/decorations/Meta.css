@@ -2,7 +2,7 @@
 	display:grid;
 	hyphens: manual;
 	background-color: rgb(255 255 255 / 0.5);
-	border-block: 1px solid var(--blue-border);
+	border-block: 1px solid var(--color-local-border);
 	margin: var(--size-default) 0;
 }
 .Meta-section {
@@ -10,14 +10,14 @@
 	gap: var(--size-medium);
 	grid-template-columns: 1fr 1fr;
 	margin: var(--size-default) 0;
-	border-block: 1px solid var(--blue-border);
+	border-block: 1px solid var(--color-local-border);
 }
 
 .Meta-size-value {
 	font-size: var(--size-l2);
 	font-weight: 900;
 	display: block;
-	text-shadow: 0.5rem 0.5rem var(--blue-border);
+	text-shadow: 0.5rem 0.5rem var(--color-local-border);
 	line-height: 1;
 	text-align: center;
 }
@@ -47,7 +47,7 @@
 	justify-content: center;
 	align-items: center;
 	padding: var(--size-xsmall) 0;
-	border-block-start: 1px solid var(--blue-border);
+	border-block-start: 1px solid var(--color-local-border);
 }
 .Meta-package-name {
 	font-family: var(--font-family-mono);
@@ -66,7 +66,7 @@
 	font-size: var(--size-medium);
 	font-weight: 900;
 	display: block;
-	text-shadow: 0.25rem 0.25rem var(--blue-border);
+	text-shadow: 0.25rem 0.25rem var(--color-local-border);
 	line-height: 1;
 	text-align: center;
 }
@@ -84,13 +84,13 @@
   margin-bottom: var(--size-default);
 	background-color: rgb(255 255 255 / 0.5);
 	padding: var(--size-xsmall);
-	border-block: 1px solid var(--blue-border);
+	border-block: 1px solid var(--color-local-border);
 }
 
 .Meta code {
 	font-family: var(--font-family-mono);
 	font-size: var(--size-medium);
-	text-shadow: 0.125rem 0.125rem var(--blue-border);
+	text-shadow: 0.125rem 0.125rem var(--color-local-border);
 }
 
 .Meta h2 {

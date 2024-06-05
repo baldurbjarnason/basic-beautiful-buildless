@@ -1,8 +1,8 @@
 hr {
   border: none;
   border-bottom: 1px solid #333;
-  width: 50%;
-  margin: 0 auto;
+  width: var(--measure);
+  margin: 0;
   margin-block: calc(var(--size-default) * 2);
   height: 1px;
 }

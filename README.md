@@ -1,38 +1,41 @@
 ---
-title: "Instant Import Maps"
+title: "Basic, Beautiful & Buildless"
 description: "Just add package names"
 layout: layout.njk
 permalink: "/"
 ---
 
-<div class="Title">
+<div class="Front">
 
-<h1 id="site-title" class="Title-heading"><em>Instant</em> <span class="Title-main">Import Maps</span></h1>
+<nav class="Nav"><ul><li><a href="/instant-import-maps/" class="Front-nav">Instant Import Map Generator</a></li> <li><a href="https://baldurbjarnason.com/" class="Front-nav">Blog</a></li></ul></nav>
 
-<p class="Title-description">{{description}}</p>
+<h1 id="site-Front" class="Front-heading">
+<span class="Front-heading-part">Basic,</span>
+<span class="Front-heading-part">Beautiful <em>&amp;</em></span>
+<span class="Front-heading-part"><strong>Buildless</strong></span>
+</h1>
+
+&mdash;_How big is this damn autocomplete library?!_
+
+&mdash;_I need to polish this form a bit but if I have to add a dependency, then I need to set up some sort of build process, and then this "small" project is no longer small._
+
+&mdash;_Do I really want to add a script directly from a CDN? What happens if they change something?_
+
+&mdash;_Why is everything to do with JavaScript such a pain in the ass?!_
+
+<div class="Front-newsletter">
+
+## Don't miss a thing
+
+If you find this site useful, you might want to either subscribe to my [blog](https://wwww.baldurbjarnason.com/) or my weekly newsletter. If you join the newsletter you'll get a free PDF of <strong>three bonus essays</strong> from my book <em>Out of the Software Crisis.</em>
+
+{% include 'newsletter.njk' %}
 
 </div>
 
-<form action="/process/" method="get" class="Form">
 
-<div><label class="FormLabel" for="specifiers">
-		Package names
-		<input name="specifiers" value="" type="text" id="specifiers" aria-describedby="input-description">
-	</label>
-
-<label class="FormLabel">
-	<input name="json" type="checkbox" id="json-input"> <span class="Form-checkbox-text">Return markup and map as a JSON object</span>
-	</label></div>
-
-<div id="input-description">
-
-Enter the `npm` names of the packages you want to use in your module scripts, separated by spaces. You can specify the version you want by appending `@x.y.z` to the end where `x.y.z` stands for the version number. For example: `dompurify@3.1.4`.
+{% include 'footer.njk' %}
 
 </div>
-<button>Instant Import Map!</button>
-
-Made by [Baldur Bjarnason](https://baldurbjarnason.com/)
-
-</form>
 
 

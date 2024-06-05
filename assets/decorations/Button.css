@@ -58,3 +58,21 @@
 .Button:focus {
   animation: var(--animation-bounce-small);
 }
+
+.Button-nav {
+  color: var(--color-local-front);
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--color-local-border);
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.Button-nav:hover {
+  color: white;
+  background-color: var(--link);
+}
+
+instant-results .Button-nav {
+  margin-inline-start: var(--size-medium);
+}

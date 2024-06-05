@@ -5,6 +5,7 @@
   --blue-border: #a9d0ee;
   --orange-back: #ffdfba;
   --orange-border: #eecea9;
+  --orange-front: #583002;
   --link-back: #cccccc1a;
   --yellow-border: #eeeea0;
   --base-back: #fff9c6;
@@ -17,6 +18,10 @@
   --faded-yellow: #f8f7f2;
   --background-color-post: var(--base-grey);
   --postCard-border-color: var(--base-border);
+  --purple-back: #ddd3ee;
+  --purple-border: #b19cd9;
+  --purple-front: #332155;
+  --purple-shadow: #b19cd9;
 }
 
 .BaseBack {

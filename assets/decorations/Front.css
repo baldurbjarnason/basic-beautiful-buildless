@@ -1,0 +1,96 @@
+.Front {
+  padding-block: var(--size-default);
+  padding-inline: var(--size-medium);
+  background-color: var(--purple-back);
+  border-inline-start: var(--size-default) solid var(--purple-border);
+  color: var(--purple-front);
+  position: relative;
+  min-block-size: 100vh;
+}
+
+.Front-heading {
+  padding: 0;
+  padding-block: var(--size-default);
+  text-align: start;
+  text-transform: uppercase;
+  line-height: 0.85;
+  font-size: var(--size-l4);
+  font-weight: 900;
+  border-block-end: 0.25rem solid var(--purple-border);
+}
+
+.Front-main {
+  color: white;
+  font-weight: 900;
+  -webkit-text-stroke: 0.125rem black;
+}
+
+.Front-heading-part {
+
+  text-transform: none;
+  font-style: normal;
+  display: block;
+  font-weight: 400;
+}
+
+.Front-heading em {
+  text-transform: none;
+  font-style: normal;
+  font-weight: 100;
+  font-family: var(--font-family-serif);
+  text-shadow: 0.25rem 0.25rem var(--purple-border);
+}
+
+.Front-heading strong {
+  text-transform: none;
+  font-weight: 900;
+  text-shadow: 0.5rem 0.5rem var(--purple-border);
+}
+
+
+.Front-collection {
+  justify-content: center;
+}
+
+.Front-nav {
+  color: var(--link);
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--purple-border);
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.Front-nav:hover {
+  color: white;
+  background-color: var(--link);
+}
+
+.Front-nav {
+  color: var(--purple-front);
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--purple-border);
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.Front-nav:hover {
+  color: white;
+  background-color: var(--link);
+}
+
+.Front p {
+  margin-block-end: var(--size-default);
+}
+
+.Front footer {
+}
+
+.Front-newsletter {
+  margin-inline: calc(0rem - var(--size-medium));
+  padding-block-end: var(--size-l1);
+  padding-inline: var(--size-medium);
+  background-color: rgb(255 255 255 / 0.5);
+  border-block: 0.25rem solid var(--purple-border);
+}

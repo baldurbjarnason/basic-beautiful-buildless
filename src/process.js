@@ -34,7 +34,7 @@ export async function processParams(params) {
 	}
 	result = JSON.stringify(result, null, "\t");
 	const meta = `
-<p><a href="#code" class="Result-nav">Skip to code</a></p>
+<p><a href="#code" class="Button-nav">Skip to code</a></p>
 	<div class="Meta">
 	<h2>Results</h2>
 <div class="Notice"><p><em>Calculations and preloads <strong>do not</strong> include WASM files unless they were inlined using Base64 or similar.</em></p>

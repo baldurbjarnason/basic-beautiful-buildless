@@ -1,11 +1,9 @@
 .Result {
-  flex-direction: column;
   padding-block: var(--size-default);
   padding-inline: var(--size-medium);
   background-color: var(--blue-back);
   border-inline-start: var(--size-default) solid var(--blue-border);
   position: relative;
-  justify-content: center;
 }
 
 .Result-heading {
@@ -14,9 +12,9 @@
   text-align: start;
   text-transform: uppercase;
   line-height: 0.85;
-  font-size: var(--size-l1);
+  font-size: var(--size-l3);
   font-weight: 900;
-  border-block: 0.25rem solid var(--blue-border);
+  border-block-end: 0.25rem solid var(--blue-border);
 }
 
 .Result-main {
@@ -51,4 +49,8 @@
 .Result-nav:hover {
   color: white;
   background-color: var(--link);
+}
+
+instant-results .Result-nav {
+  margin-inline-start: var(--size-medium);
 }

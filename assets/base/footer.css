@@ -1,0 +1,4 @@
+footer {
+	display: block;
+	padding: var(--size-default) 0;
+}
