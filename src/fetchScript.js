@@ -183,6 +183,8 @@ export async function shimMarkup() {
 	return `<script async src='${SHIM_URL}' integrity='${sri}' crossorigin='anonymous' data-size='${size}' data-compressed='${compressed}'></script>`;
 }
 
+const store = new Map();
+
 export async function fetchScript(url) {
 	const scriptResponse = await fetch(url);
 	if (!scriptResponse.ok) return [];
@@ -201,11 +203,14 @@ export async function fetchScript(url) {
 }
 
 async function processScript(pack) {
+	if (store.has(pack.url.href)) return store.get(pack.url.href);
 	const dependencies = (
 		await Promise.all(pack.specifiers.map((url) => fetchScript(url.href)))
 	).flat();
 	const depProcessed = (
 		await Promise.all(dependencies.map((script) => processScript(script)))
 	).flat();
-	return [pack].concat(depProcessed).flat();
+	const result = [pack].concat(depProcessed).flat();
+	store.set(pack.url.href, result);
+	return result;
 }

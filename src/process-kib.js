@@ -2,7 +2,10 @@ import { escapeMarkup } from "./escape.js";
 import { toJSON } from "./fetchScript.js";
 
 export async function processKiBParams(params) {
-	const specifiers = params.get("specifiers").split(/\W+/);
+	const specifiers = params
+		.get("specifiers")
+		.split(" ")
+		.map((result) => result.trim());
 	const jsonResult = await toJSON(specifiers);
 	const meta = `
 	<div class="Meta Meta-kib">

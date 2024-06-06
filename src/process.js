@@ -2,7 +2,10 @@ import { escapeMarkup } from "./escape.js";
 import { markup, shimMarkup, toJSON } from "./fetchScript.js";
 
 export async function processParams(params) {
-	const specifiers = params.get("specifiers").split(/\W+/);
+	const specifiers = params
+		.get("specifiers")
+		.split(" ")
+		.map((result) => result.trim());
 	const json = params.get("json") === "on";
 	let result = "";
 	let jsonResult;
@@ -22,10 +25,10 @@ export async function processParams(params) {
 	let shim = "";
 	if (json) {
 		result.shim = await shimMarkup();
+		result = JSON.stringify(result, null, "\t");
 	} else {
 		shim = await shimMarkup();
 	}
-	result = JSON.stringify(result, null, "\t");
 	const meta = `
 <p><a href="#code" class="Button-nav">Skip to code</a></p>
 	<div class="Meta">
