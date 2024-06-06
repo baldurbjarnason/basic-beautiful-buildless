@@ -1,0 +1,56 @@
+.InstantKib {
+  padding-block: var(--size-default);
+  padding-inline: var(--size-medium);
+  border-inline-start: var(--size-default) solid var(--green-border);
+  position: relative;
+  background-color: var(--green-back);
+  --color-local-border: var(--green-border);
+  --color-local-front: var(--green-front);
+}
+.InstantKib-heading {
+  padding: 0;
+  padding-block: var(--size-default);
+  text-align: start;
+  text-transform: uppercase;
+  line-height: 0.85;
+  font-size: var(--size-l4);
+}
+
+.InstantKib-main {
+  color: var(--base-back);
+  font-weight: 900;
+  -webkit-text-stroke: 0.125rem black;
+  text-shadow: 0.5rem 0.5rem var(--green-border);
+  text-transform: none;
+}
+
+.InstantKib-heading em {
+  text-transform: none;
+  display: block;
+  font-size: var(--size-l2);
+}
+
+.InstantKib-description {
+  font-weight: 600;
+  margin-block: 0 auto;
+  border-bottom: 0.25rem solid var(--green-border);
+  text-transform: uppercase;
+}
+
+.InstantKib-collection {
+  justify-content: center;
+}
+
+.InstantKib-nav {
+  color: var(--green-front);
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: var(--green-border);
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.InstantKib-nav:hover {
+  color: white;
+  background-color: var(--link);
+}

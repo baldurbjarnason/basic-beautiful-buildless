@@ -13,12 +13,17 @@ export default async function () {
 	const mainScript = scripts.find(
 		(script) => script.filename === "instant-results.js",
 	);
+	const kibScript = scripts.find(
+		(script) => script.filename === "instant-kib.js",
+	);
 	return {
 		files: files.flat().concat(scriptFiles),
 		filesJSON: JSON.stringify(files.flat().concat(scriptFiles)),
 		main: `<script type="module" src="${mainScript.url}"></script>
 `,
 		scripts,
+		kib: `<script type="module" src="${kibScript.url}"></script>
+`,
 		map: processMap(scripts),
 		modulepreloads: scripts
 			.filter((pack) => pack.filename !== "instant-results.js")

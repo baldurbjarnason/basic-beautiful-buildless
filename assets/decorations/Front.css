@@ -102,3 +102,7 @@
   margin: 0;
   font-weight: 900;
 }
+
+.Front ul {
+  margin: var(--size-default) 0;
+}

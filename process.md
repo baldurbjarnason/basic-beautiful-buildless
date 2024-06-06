@@ -17,6 +17,7 @@ layout: scripted.njk
   <output>Processing...</output>
 </instant-results>
 
+
 {% include 'footer.njk' %}
 
 </div>

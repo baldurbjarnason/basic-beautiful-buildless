@@ -1,0 +1,36 @@
+---
+title: "How many KiB?"
+description: "Just add package names"
+layout: layout.njk
+---
+
+<div class="InstantKib">
+
+<a href="/" class="InstantKib-nav">&lt; Back</a>
+
+<h1 id="site-title" class="InstantKib-heading"><em>How many</em> <span class="InstantKib-main">KiB?</span></h1>
+
+<p class="InstantKib-description">{{description}}</p>
+
+</div>
+
+<form action="/how-many-kib-result/" method="get" class="Form">
+
+<div><label class="FormLabel" for="specifiers">
+		Package names
+		<input name="specifiers" value="" type="text" id="specifiers" aria-describedby="input-description">
+	</label></div>
+
+<div id="input-description">
+
+Enter the `npm` names of the packages you want to use in your module scripts, separated by spaces. You can specify the version you want by appending `@x.y.z` to the end where `x.y.z` stands for the version number. For example: `dompurify@3.1.4`.
+
+</div>
+
+<button>How many KiB?</button>
+
+{% include 'footer.njk' %}
+
+</form>
+
+

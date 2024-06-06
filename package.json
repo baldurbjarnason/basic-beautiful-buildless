@@ -10,6 +10,7 @@
   "main": ".eleventy.js",
   "type": "module",
   "devDependencies": {
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "@biomejs/biome": "1.7.3",
     "@swc/core": "^1.5.7"
   },

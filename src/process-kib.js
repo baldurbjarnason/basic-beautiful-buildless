@@ -1,35 +1,12 @@
 import { escapeMarkup } from "./escape.js";
-import { markup, shimMarkup, toJSON } from "./fetchScript.js";
+import { toJSON } from "./fetchScript.js";
 
-export async function processParams(params) {
+export async function processKiBParams(params) {
 	const specifiers = params.get("specifiers").split(/\W+/);
-	const json = params.get("json") === "on";
-	let result = "";
-	let jsonResult;
-	try {
-		jsonResult = await toJSON(specifiers);
-		if (!json) {
-			result = await markup(jsonResult);
-		} else {
-			result = jsonResult;
-		}
-	} catch (err) {
-		console.error(err);
-	}
-	if (result.length === 0) {
-		return { ok: false, markup: "<p>This does not seem to have worked.</p>" };
-	}
-	let shim = "";
-	if (json) {
-		result.shim = await shimMarkup();
-	} else {
-		shim = await shimMarkup();
-	}
-	result = JSON.stringify(result, null, "\t");
+	const jsonResult = await toJSON(specifiers);
 	const meta = `
-<p><a href="#code" class="Button-nav">Skip to code</a></p>
-	<div class="Meta">
-	<h2>Results</h2>
+	<div class="Meta Meta-kib">
+	<h2>Calculations</h2>
 <div class="Notice"><p><em>Calculations and preloads <strong>do not</strong> include WASM files unless they were inlined using Base64 or similar.</em></p>
 </div>
 	<h3 class="Meta-heading">You entered</h3>
@@ -45,17 +22,23 @@ export async function processParams(params) {
 	</div>
 	<h3 class="Meta-heading">Package payloads</h3>
 	${packageSizes(jsonResult.meta)}
+	${whoa(jsonResult)}
 	</div>`;
 	// Add skip to code. And "you entered."
-	const rows = result.split("\n");
 	return {
 		ok: true,
-		markup: `${meta}<label class="Meta" id="code">
-		<span class="ResultLabel Meta-heading">Map and Preloads:</span>
-<textarea spellcheck="false" rows="${rows.length + 2}">${escapeMarkup(result)}
-${shim}
-</textarea></label>`,
+		markup: `${meta}`,
 	};
+}
+
+function whoa(results) {
+	if (
+		results.meta.compressed.includes("KiB") ||
+		results.meta.compressed.includes("Bytes")
+	) {
+		return `<p class="Meta-comment">That isn’t so bad, is it?</p>`;
+	}
+	return `<p class="Meta-comment">Whoah! That's not just a few KiB. That&rquo;s the other thing!</p>`;
 }
 
 function packageSizes(meta) {

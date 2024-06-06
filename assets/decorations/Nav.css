@@ -2,5 +2,5 @@
 	display: block;
 }
 
-.Nav ul {list-style: none; padding: 0; margin: 0;}
+.Nav ul {list-style: none; padding: 0; margin: 0; display: flex; gap: var(--size-small);}
 .Nav li {display: inline;}

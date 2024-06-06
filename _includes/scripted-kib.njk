@@ -1,0 +1,11 @@
+{% extends 'layout.njk' %}
+
+{% block scripts %}
+{% include 'import-map.njk' %}
+{{ assets.modulepreloads | safe }}
+{{ assets.kib | safe }}
+{% endblock %}
+
+{% block mainend %}
+      {# Add the form from the front page so the query can easily be re-run. The only config might be to switch from returning HTML to a JSON for further modification. #}
+{% endblock %}

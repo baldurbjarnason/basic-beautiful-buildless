@@ -50,7 +50,3 @@
   color: white;
   background-color: var(--link);
 }
-
-instant-results .Result-nav {
-  margin-inline-start: var(--size-medium);
-}

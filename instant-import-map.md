@@ -30,6 +30,11 @@ layout: layout.njk
 Enter the `npm` names of the packages you want to use in your module scripts, separated by spaces. You can specify the version you want by appending `@x.y.z` to the end where `x.y.z` stands for the version number. For example: `dompurify@3.1.4`.
 
 </div>
+
+
+
+Copy and paste the markup into the `head` of your page. Or, if you want to process the map or preloads beforehand, use the `json` option and add the resulting `JSON` file as a data source to your static site generator.
+
 <button>Instant Import Map!</button>
 
 {% include 'footer.njk' %}

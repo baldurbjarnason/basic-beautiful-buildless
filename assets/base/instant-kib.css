@@ -1,4 +1,4 @@
-instant-results {
+instant-kib {
   padding-block: var(--size-default);
   padding-inline: 0;
   position: relative;
@@ -8,6 +8,6 @@ instant-results {
   margin-inline: calc(0rem - var(--size-medium));
   --border-color: var(--blue-border);
 }
-instant-results * {
+instant-kib * {
   max-inline-size: none;
 }
