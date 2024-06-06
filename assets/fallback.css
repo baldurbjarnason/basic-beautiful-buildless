@@ -1,37 +1,10 @@
-.PostCard svg,
-.Navigation svg,
-.Form svg {
-  display: none;
-}
-.Navigation {
-  position: relative;
-  margin-left: 110px;
-}
-.NavLogo svg {
-  display: block;
-  position: absolute;
-  left: -100px;
-  top: -10px;
-  width: 100px;
-  height: 100px;
-}
-.NavLogo .visually-hidden {
-  clip: inherit;
-  width: auto;
-  height: auto;
-  position: relative;
-  overflow: visible;
-}
 
-.Navigation ul {
-  list-style: none;
-}
 
 html {
   font-size: 120%;
 }
 
-.Wrapper {
+main {
   max-width: 600px;
   margin: 0 auto;
   font-family: Georgia, "Times New Roman", Times, serif;
