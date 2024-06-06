@@ -30,6 +30,9 @@
       } else {
         console.log("layers supported")
       }
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/serviceworker.js');
+      }
   </script>
     
 

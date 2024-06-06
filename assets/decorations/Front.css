@@ -94,3 +94,11 @@
   background-color: rgb(255 255 255 / 0.5);
   border-block: 0.25rem solid var(--purple-border);
 }
+
+.Front h2 {
+  font-size: var(--size-medium);
+  line-height: 1.1;
+  padding: var(--size-default) 0 var(--size-small);
+  margin: 0;
+  font-weight: 900;
+}

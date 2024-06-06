@@ -15,6 +15,7 @@ export default async function () {
 	);
 	return {
 		files: files.flat().concat(scriptFiles),
+		filesJSON: JSON.stringify(files.flat().concat(scriptFiles)),
 		main: `<script type="module" src="${mainScript.url}"></script>
 `,
 		scripts,

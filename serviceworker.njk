@@ -1,0 +1,53 @@
+---
+title: "Service Worker"
+permalink: "/serviceworker.js"
+layout: "layout-script.njk"
+---
+
+// {% uuid %}
+
+const offline = 'offline-v1';
+
+const offline_urls = {{ assets.filesJSON | safe }};
+
+self.addEventListener('install', install);
+self.addEventListener('activate', activate);
+self.addEventListener('fetch', fetchHandler);
+
+function install(event) {
+  event.waitUntil(
+    caches.open(offline)
+      .then(cache => cache.addAll(offline_urls))
+      .then(self.skipWaiting())
+  );
+}
+
+function activate(event) {
+  const currentCaches = [offline];
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    }).then(cachesToDelete => {
+      return Promise.all(cachesToDelete.map(cacheToDelete => {
+        return caches.delete(cacheToDelete);
+      }));
+    }).then(() => self.clients.claim())
+  );
+}
+
+function fetchHandler(event) {
+  // Skip cross-origin requests, like those for Google Analytics.
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(cacheMatcher(event));
+  }
+}
+
+async function cacheMatcher(event) {
+  const cachedResponse = await caches.match(event.request)
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  // I think the a runtime cache is more trouble than it's worth considering this app needs a network to function
+  return fetch(event.request);
+}
