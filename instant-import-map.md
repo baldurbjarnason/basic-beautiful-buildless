@@ -37,8 +37,6 @@ Copy and paste the markup into the `head` of your page. Or, if you want to proce
 
 <button>Instant Import Map!</button>
 
-{% include 'footer.njk' %}
-
 </form>
 
 

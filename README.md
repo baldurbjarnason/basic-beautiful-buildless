@@ -28,7 +28,7 @@ permalink: "/"
 
 There is a diversity of lightweight static site generators available. My personal favourite -- the one I used to make this site -- is [_Eleventy_](https://www.11ty.dev/)  but there's one in every programming language.
 
-Static site builders handle HTML and markup quite well. That's what they do. Even CSS can be handled quite well by many of them.
+Static site builders handle HTML and markup quite well. That's what they do. Even CSS -- at least CSS of the complexity a small site needs -- can be handled quite well by many of them.
 
 But as soon as you need to add scripting things get quite complicated.
 
@@ -69,12 +69,12 @@ _It can't._
 
 ## Small tools for small projects
 
-But, it can be done automatically and, more importantly, it can be done in the browser.
+But even though it can't be done _simply_, it can be done _automatically_ and, more importantly, it can be done in the browser.
 
-That means somebody else -- like me, for instance -- could build tools that does the complicated and involved things necessary for you to be able to:
+That means somebody else -- like me, for instance -- can build tools that do the complicated and involved things necessary for you to be able to:
 
-- Figure out the correct URLs for loading the package.
-- Pinning their version so you know what you're getting.
+- Figure out the correct URLs for loading the package from a CDN like [`esm.sh`](https://esm.sh/).
+- Pinning their version to ensure you will consistently get the same package even though new versions get released.
 - Load them safely, using [subresource integrity (SRI) hashes](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) that prevent the browser from even loading them if they've been changed.
 - Map them to friendly package names you can use in your scripts using [import maps](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap).
 - Automatically include a [polyfill for import maps](https://github.com/guybedford/es-module-shims?tab=readme-ov-file) so you don't have to create a separate bundle for older browsers.
@@ -116,31 +116,17 @@ And if you just want the size calculator, you can find that over here:
 
 ## Caveats
 
-- The _Instant Import Map_ tool uses the [`esm.sh`](https://esm.sh/) CDN. Not everything works with it. Most ES module packages should, though.
+- The _Instant Import Map_ tool uses the [`esm.sh`](https://esm.sh/) CDN. Not everything works with their system. Most web-oriented ES module packages should, though.
 - The tool has a module walker that parses through the `imports`, both static and dynamic, of a module and if the import values are URL strings, it will fetch and walk through them as well.
 - My quick and dirty module walker doesn't handle `wasm` files so if you import a package that uses `wasm` that file won't be included in the preload elements or in the size calculations.
 - The module walker itself is a bit messy. It has test coverage but I'm sure you can find packages that break it.
 - It includes the `importmap` polyfill by default. If you don't need it, you can edit it from the markup yourself.
 - The [`esm.sh`](https://esm.sh/) CDN minifies scripts automatically but doesn't do tree-shaking without additional configuration, so none of the imports or calculations use tree-shaking.
+- Some dependencies, such as React, are likely to require custom configuration which are beyond the scope of this project.
 
-I'm sure there are more that I'm forgetting. If you run into issues, let me know. Just bear in mind that this isn't intended for large apps or big projects.
+I'm sure there are more that I'm forgetting. If you run into issues, [let me know](https://github.com/baldurbjarnason/basic-beautiful-buildless/issues). Just bear in mind that this isn't intended for large apps or big projects. It's a small tool for small sites.
 
-If you find this tool helpful, let me know! I have ideas for a few other "buildless" tools, but it's hard to tell whether people actually like what you've done, esp. when you haven't bothered to add analytics. 🙂
-
-
-
-<div class="Front-newsletter">
-
-## Don't miss a thing
-
-If you find this site useful, you might want to either subscribe to my [blog](https://wwww.baldurbjarnason.com/) or to my weekly newsletter. If you join the newsletter you'll get a free PDF of <strong>three bonus essays</strong> from my book <em>Out of the Software Crisis.</em>
-
-{% include 'newsletter.njk' %}
-
-</div>
-
-
-{% include 'footer.njk' %}
+If you find this tool helpful, let me know! I have ideas for a few other "buildless" tools, but it's hard to tell whether people actually like what you've done, esp. when you're like me and haven't bothered to add analytics to something you've launched. 🙂
 
 </div>
 

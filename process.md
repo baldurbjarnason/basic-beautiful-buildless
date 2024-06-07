@@ -18,6 +18,5 @@ layout: scripted.njk
 </instant-results>
 
 
-{% include 'footer.njk' %}
 
 </div>

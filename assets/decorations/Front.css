@@ -1,5 +1,5 @@
 .Front {
-  padding-block: var(--size-default);
+  padding-block: var(--size-l2);
   padding-inline: var(--size-medium);
   background-color: var(--purple-back);
   border-inline-start: var(--size-default) solid var(--purple-border);
