@@ -38,7 +38,9 @@ export async function fetchAllScripts(specifiers = []) {
 	};
 	for (let index = 0; index < specifiers.length; index++) {
 		const spec = specifiers[index];
-		const subgraph = graph[index];
+		const subgraph = Array.from(
+			new Set(graph[index].map((pack) => pack.url.href)),
+		).map((href) => graph[index].find((pack) => pack.url.href === href));
 		const totalSize = subgraph.reduce((prev, current) => {
 			return prev + current.size;
 		}, 0);
@@ -189,6 +191,7 @@ export async function fetchScript(url) {
 	const scriptResponse = await fetch(url);
 	if (!scriptResponse.ok) return [];
 	const resultURL = new URL(scriptResponse.url);
+	if (store.has(resultURL)) return store.get(resultURL);
 	const scriptText = await scriptResponse.text();
 	const { sri, size, compressed } = await checksum(scriptText);
 	const specifiers = await getSpecifiers(scriptText, resultURL);
@@ -199,6 +202,7 @@ export async function fetchScript(url) {
 		specifiers,
 		url: resultURL,
 	});
+	store.set(resultURL, graph);
 	return graph;
 }
 
@@ -211,6 +215,5 @@ async function processScript(pack) {
 		await Promise.all(dependencies.map((script) => processScript(script)))
 	).flat();
 	const result = [pack].concat(depProcessed).flat();
-	store.set(pack.url.href, result);
 	return result;
 }

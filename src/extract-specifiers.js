@@ -9,7 +9,9 @@ function parseBody(body, shim) {
 	let identifiers = [];
 	// if (body === undefined || body === null || (!body.length && body.length !== 0)) console.log(body);
 	for (const node of body) {
-		if (
+		if (node === null) {
+			// console.log(node);
+		} else if (
 			node.type === "ImportDeclaration" ||
 			node.type === "ExportNamedDeclaration" ||
 			node.type === "ExportAllDeclaration"
