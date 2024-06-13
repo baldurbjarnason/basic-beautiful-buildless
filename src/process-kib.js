@@ -2,11 +2,12 @@ import { escapeMarkup } from "./escape.js";
 import { toJSON } from "./fetchScript.js";
 
 export async function processKiBParams(params) {
+	const SKIP_HASH = true;
 	const specifiers = params
 		.get("specifiers")
 		.split(" ")
 		.map((result) => result.trim());
-	const jsonResult = await toJSON(specifiers);
+	const jsonResult = await toJSON(specifiers, SKIP_HASH);
 	const meta = `
 	<div class="Meta Meta-kib">
 	<h2>Calculations</h2>

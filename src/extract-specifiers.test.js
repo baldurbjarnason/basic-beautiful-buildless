@@ -37,6 +37,11 @@ test("extract-specifiers", async function (t) {
 		assert.deepEqual(identifiers, []);
 	});
 
+	await t.test("Should not blow up with null nodes", function () {
+		const identifiers = extractSpecifiers({ body: [null] }, false);
+		assert.deepEqual(identifiers, []);
+	});
+
 	await t.test("test with real world example", function () {
 		const identifiers = extractSpecifiers(ast3, false);
 		assert.deepEqual(identifiers, [

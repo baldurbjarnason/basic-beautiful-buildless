@@ -3,6 +3,7 @@ import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 export default function (eleventyConfig) {
 	eleventyConfig.addGlobalData("layout", "layout.njk");
 	eleventyConfig.addPassthroughCopy("img");
+	eleventyConfig.addPassthroughCopy("favicon.ico");
 	eleventyConfig.addPassthroughCopy("images");
 	eleventyConfig.addPassthroughCopy("assets");
 	eleventyConfig.addPassthroughCopy("src");

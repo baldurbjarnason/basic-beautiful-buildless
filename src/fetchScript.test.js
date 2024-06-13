@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { fetchAllScripts, markup, shimMarkup, toJSON } from "./fetchScript.js";
+import { fetchAllScripts, fetchScript, markup, shimMarkup, toJSON } from "./fetchScript.js";
 import fs from "node:fs/promises";
 
 const resultGraph = [
@@ -166,6 +166,11 @@ test("fetchAllScripts", async function (t) {
 	await t.test("json markup", async function () {
 		const markupJSON = await toJSON(["@webreflection/signal"]);
 		assert.deepEqual(markupJSON, testJSON);
+	});
+
+	await t.test("not ok fetchscript", async function () {
+		const result = await fetchScript("https://example.com/404");
+		assert.deepEqual(result, []);
 	});
 	await t.test("basic markup", async function () {
 		const json = await toJSON(["@webreflection/signal"]);

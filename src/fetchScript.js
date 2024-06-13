@@ -1,23 +1,7 @@
 import { extractSpecifiers } from "./extract-specifiers.js";
 import { parse } from "./swc.js";
-
-const encoder = new TextEncoder();
-export async function checksum(scriptText) {
-	const data = encoder.encode(scriptText);
-
-	const ds = new CompressionStream("gzip");
-	const decompressedStream = new Blob([data]).stream().pipeThrough(ds);
-	const compressed = new Uint8Array(
-		await new Response(decompressedStream).arrayBuffer(),
-	);
-	const hash = await crypto.subtle.digest("SHA-384", data);
-	const base64string = btoa(String.fromCharCode(...new Uint8Array(hash)));
-	return {
-		sri: `sha384-${base64string}`,
-		size: data.length,
-		compressed: compressed.length,
-	};
-}
+import { checksum } from "./checksum.js";
+import { toHumanReadable } from "./sizes.js";
 
 export async function getSpecifiers(inputText, url) {
 	const ast = await parse(inputText, {
@@ -28,11 +12,11 @@ export async function getSpecifiers(inputText, url) {
 	return specifiers.map((specifier) => new URL(specifier, url));
 }
 
-export async function fetchAllScripts(specifiers = []) {
+export async function fetchAllScripts(specifiers = [], skipHash = false) {
 	const packages = await Promise.all(
-		specifiers.map((specifier) => fetchPackage(specifier)),
+		specifiers.map((specifier) => fetchPackage(specifier, skipHash)),
 	);
-	const graph = await Promise.all(packages.map((pack) => processScript(pack)));
+	const graph = await Promise.all(packages.map((pack) => processScript(pack, skipHash)));
 	const meta = {
 		packages: {},
 	};
@@ -56,12 +40,12 @@ export async function fetchAllScripts(specifiers = []) {
 	return { graph: normaliseGraph(graph.flat()), meta };
 }
 
-export async function fetchPackage(specifier) {
+export async function fetchPackage(specifier, skipHash) {
 	const url = dependencyToURL(specifier);
 	const scriptResponse = await fetch(url);
 	const resultURL = new URL(scriptResponse.url);
 	const scriptText = await scriptResponse.text();
-	const { sri, size, compressed } = await checksum(scriptText);
+	const { sri, size, compressed } = await checksum(scriptText, skipHash);
 	const originalSpecifiers = await getSpecifiers(scriptText, resultURL);
 	const hrefs = originalSpecifiers.map((specifier) => specifier.href);
 	const specifiers = Array.from(new Set(hrefs)).map(
@@ -87,30 +71,10 @@ function normaliseSpecifier(specifier) {
 	return name;
 }
 
-function toHumanReadable(bytes) {
-	const log = 1024;
-	const decimals = 3;
-	const sizes = [
-		"Bytes",
-		"KiB",
-		"MiB",
-		"GiB",
-		"TiB",
-		"PiB",
-		"EiB",
-		"ZiB",
-		"YiB",
-	];
-	const index = Math.floor(Math.log(bytes) / Math.log(log));
-	return `${Number.parseFloat((bytes / log ** index).toFixed(decimals))} ${
-		sizes[index]
-	}`;
-}
-
 // Use document.createTextNode to inject this into the rendered template
-export async function toJSON(specifiers = []) {
+export async function toJSON(specifiers = [], skipHash = false) {
 	const map = { imports: {} };
-	const { graph, meta } = await fetchAllScripts(specifiers);
+	const { graph, meta } = await fetchAllScripts(specifiers, skipHash);
 	const totalSize = graph.reduce((prev, current) => {
 		return prev + current.size;
 	}, 0);
@@ -187,13 +151,17 @@ export async function shimMarkup() {
 
 const store = new Map();
 
-export async function fetchScript(url) {
+export async function fetchScript(url, skipHash) {
+	if (store.has(url)) { 
+		return store.get(url)
+	};
 	const scriptResponse = await fetch(url);
-	if (!scriptResponse.ok) return [];
+	if (!scriptResponse.ok) { 
+		return []
+	};
 	const resultURL = new URL(scriptResponse.url);
-	if (store.has(resultURL)) return store.get(resultURL);
 	const scriptText = await scriptResponse.text();
-	const { sri, size, compressed } = await checksum(scriptText);
+	const { sri, size, compressed } = await checksum(scriptText, skipHash);
 	const specifiers = await getSpecifiers(scriptText, resultURL);
 	const graph = await processScript({
 		sri,
@@ -201,18 +169,17 @@ export async function fetchScript(url) {
 		compressed,
 		specifiers,
 		url: resultURL,
-	});
-	store.set(resultURL, graph);
+	}, skipHash);
+	store.set(url, graph);
 	return graph;
 }
 
-async function processScript(pack) {
-	if (store.has(pack.url.href)) return store.get(pack.url.href);
+async function processScript(pack, skipHash) {
 	const dependencies = (
-		await Promise.all(pack.specifiers.map((url) => fetchScript(url.href)))
+		await Promise.all(pack.specifiers.map((url) => fetchScript(url.href, skipHash)))
 	).flat();
 	const depProcessed = (
-		await Promise.all(dependencies.map((script) => processScript(script)))
+		await Promise.all(dependencies.map((script) => processScript(script, skipHash)))
 	).flat();
 	const result = [pack].concat(depProcessed).flat();
 	return result;
